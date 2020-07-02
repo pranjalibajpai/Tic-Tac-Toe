@@ -21,7 +21,6 @@ body{
   font-size: 20px;
   box-shadow: 2px 5px 4px #888888;
   opacity: 0.6;
-  transition-duration: 0.4s;
 }
 .pbutton:hover{
   background: yellow;
