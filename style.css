@@ -1,0 +1,28 @@
+body{
+  background-image: url("images/bg3.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.outer{
+  font-family: 'Amita';
+  width: 35%;
+  padding: 30px;
+  border: 10px solid #99FFFF;
+  border-radius:10px;
+  margin: auto;
+  margin-top:200px;
+  text-align: center;
+  box-shadow: 5px 10px 8px #888888;
+}
+.pbutton{
+  font-family: 'Leckerli One';
+  font-size: 20px;
+  box-shadow: 2px 5px 4px #888888;
+  opacity: 0.6;
+  transition-duration: 0.4s;
+}
+.pbutton:hover{
+  background: yellow;
+}
