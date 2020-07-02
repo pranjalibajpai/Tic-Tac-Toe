@@ -6,7 +6,7 @@ body{
   background-size: cover;
 }
 .outer{
-  font-family: 'Amita';
+  font-family: 'Paprika';
   width: 35%;
   padding: 30px;
   border: 10px solid #99FFFF;
@@ -17,7 +17,7 @@ body{
   box-shadow: 5px 10px 8px #888888;
 }
 .pbutton{
-  font-family: 'Leckerli One';
+  font-family: 'Paprika';
   font-size: 20px;
   box-shadow: 2px 5px 4px #888888;
   opacity: 0.6;
