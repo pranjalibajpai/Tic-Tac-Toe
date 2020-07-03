@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TIC-TAC-TOE</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link href='https://fonts.googleapis.com/css?family=Paprika' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Leckerli One' rel='stylesheet'>
-  <link rel="icon" type="image/png" sizes="16x16" href="images/icon.png">
+    <title>TIC-TAC-TOE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Paprika' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Leckerli-One' rel='stylesheet'>
+    <link rel="icon" type="image/png" href="images/icon.png">
 </head>
-<bod>
-  <div class="outer">
-    <h1 id="welcome">WELCOME TO THE GAME ! </h1>
-    <div class="inner">
-      <h2 id="player">How would you like to play?</h2>
-      <button type="button" class="pbutton" onclick="ChooseSymbol()">1 Player</button>
-      <button type="button" class="pbutton" onclick="ChooseSymbol()">2 Players</button>
-    </div>
+<body>
+    <div>
+        <div class="start-menu">
+            <h2 id="welcome">Welcome To The Game !</h2>
+            <h2>Choose opponent:</h2>
+            <button onclick="ChoosePlayer(false)">Computer</button>
+            <button onclick="ChoosePlayer(true)">Crew Member</button>
+            <h2>Choose your symbol:</h2>
+            <button onclick="ChooseSymbol(true)">X</button>
+            <button onclick="ChooseSymbol(false)">O</button>
+            <h2>Select level:</h2>
+            <button onclick="ChooseLevel(true)">Easy</button>
+            <button onclick="ChooseLevel(false)">Hard</button><br><br>
+            <button id="start-game" onclick="StartGame()">Start Game</button>
+        </div>
+        <div class="main">
 
-  </div>
-  <script type="text/javascript" src="script.js"></script>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

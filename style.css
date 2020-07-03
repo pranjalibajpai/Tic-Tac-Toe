@@ -1,27 +1,75 @@
+@font-face {
+    font-family: 'font-1';
+    src:url('fonts/AstroSpace-eZ2Bg.ttf');
+}
+@font-face {
+    font-family: 'font-2';
+    src:url('fonts/MandatoryPlaything-nRRd0.ttf');
+}
+@font-face {
+    font-family: 'font-3';
+    src:url('fonts/Revamped-X3q1a.ttf');
+}
+@font-face {
+    font-family: 'font-4';
+    src:url('fonts/Squaresharps-D663.ttf');
+}
 body{
-  background-image: url("images/bg3.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+    background-image: url("images/bg3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align:center;
+    font-family: 'font-2';
+    font-size:1vw;
 }
-.outer{
-  font-family: 'Paprika';
-  width: 35%;
-  padding: 30px;
-  border: 10px solid #99FFFF;
-  border-radius:10px;
-  margin: auto;
-  margin-top:200px;
-  text-align: center;
-  box-shadow: 5px 10px 8px #888888;
+
+.start-menu{
+    width:35vw;
+    padding: 25px;
+    border: 10px solid #99FFFF;
+    border-radius:10px;
+    margin: auto;
+    margin-top:40px;
+    margin-bottom:35px;
+    text-align: center;
+    box-shadow: 5px 10px 8px #888888;
 }
-.pbutton{
-  font-family: 'Paprika';
-  font-size: 20px;
-  box-shadow: 2px 5px 4px #888888;
-  opacity: 0.6;
+.start-menu h2{
+    background-color: #5A8BCE;
+    box-shadow: 3px 3px 6px #0B3A97;
 }
-.pbutton:hover{
-  background: yellow;
+.start-menu button{
+    font-weight: bold;
+    font-family: 'font-2';
+    background-color: #4ECCB0;
+    border-radius: 8px;
+    margin: 3px;
+    padding: 15px;
+    height: 50px;
+    min-width: 55px;
+    font-size:100%;
+    border: none;
+    -webkit-transition: background-color 500ms; /* Safari */
+    transition: background-color 500ms;
+}
+.start-menu button:hover{
+    font-size: 1.5vw;
+    font-weight: bolder;
+    background-color: #77E0C9;
+    box-shadow: 0.5px 0.5px 5px black;
+    cursor: pointer; cursor: hand;
+    -webkit-transition: background-color 300ms; /* Safari */
+    transition: background-color 300ms;
+}
+#welcome{
+    font-family:'font-2';
+    font-weight: bold;
+    font-size: 3vw;
+    background-color: inherit;
+}
+#start-game{
+    font-family:'font-2';
+    font-weight: bolder;
 }
