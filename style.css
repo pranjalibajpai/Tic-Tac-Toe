@@ -15,16 +15,17 @@
     src:url('fonts/Squaresharps-D663.ttf');
 }
 body{
+    text-align:center;
+    font-family: 'font-2';
+    font-size:1vw;
+}
+.start{
     background-image: url("images/bg3.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align:center;
-    font-family: 'font-2';
-    font-size:1vw;
 }
-
 .start-menu{
     width:35vw;
     padding: 25px;
@@ -63,6 +64,13 @@ body{
     -webkit-transition: background-color 300ms; /* Safari */
     transition: background-color 300ms;
 }
+.start-menu button.active{
+    border: 2px solid red;
+    background-color: yellow;
+    padding: 13px;
+    -webkit-transition: background-color 500ms; /* Safari */
+    transition: background-color 500ms;
+}
 #welcome{
     font-family:'font-2';
     font-weight: bold;
@@ -72,4 +80,7 @@ body{
 #start-game{
     font-family:'font-2';
     font-weight: bolder;
+}
+.board{
+    background-color:black;
 }
