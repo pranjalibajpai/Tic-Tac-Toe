@@ -54,6 +54,7 @@ body{
     border: none;
     -webkit-transition: background-color 500ms; /* Safari */
     transition: background-color 500ms;
+
 }
 .start-menu button:hover{
     font-size: 1.5vw;
@@ -84,3 +85,66 @@ body{
 .board{
     background-color:black;
 }
+.start_playing{
+    width:35vw;
+    padding: 25px;
+    border: 10px solid #99FFFF;
+    border-radius:10px;
+	font-weight :bold;
+	font-family:font-1;
+    margin: auto;
+    margin-top:40px;
+    margin-bottom:35px;
+    text-align: center;
+    box-shadow: 5px 10px 8px #888888;
+}
+.start_playing h2{
+    background-color: #5A8BCE;
+    box-shadow: 3px 3px 6px #0B3A97;
+}
+.start_playing button{
+    font-weight: bold;
+    font-family: 'font-2';
+    background-color: #4ECCB0;
+    border-radius: 8px;
+    margin: 3px;
+    padding: 15px;
+    height: 50px;
+    min-width: 55px;
+    font-size:100%;
+    border: none;
+    -webkit-transition: background-color 500ms; /* Safari */
+    transition: background-color 500ms;
+
+}
+.start_playing button:hover{
+    font-size: 1.5vw;
+    font-weight: bolder;
+    background-color: #77E0C9;
+    box-shadow: 0.5px 0.5px 5px black;
+    cursor: pointer; cursor: hand;
+    -webkit-transition: background-color 300ms; /* Safari */
+    transition: background-color 300ms;
+}
+.start_playing button.active{
+    border: 2px solid red;
+    background-color: yellow;
+    padding: 13px;
+    -webkit-transition: background-color 500ms; /* Safari */
+    transition: background-color 500ms;
+}
+.start_playing .box{
+    min-width: 125px;
+    min-height: 125px;
+	padding: 2px;
+    background: #d5e6eb;
+    text-align: center;
+	vertical-align: center;
+    cursor: pointer;
+	opacity: 0.6;
+}
+
+.start_playing .box:hover {
+    opacity: 0.8;
+}
+
