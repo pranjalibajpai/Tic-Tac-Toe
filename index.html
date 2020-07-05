@@ -11,31 +11,31 @@
 </head>
 <body class="start">
     <div>
-        <div class="start-menu">
-            <h2 id="welcome">Welcome To The Game !</h2>
+		<div class="start_playing" style = "display:block">
+			<h1 id="playing">Lets play !!</h2>
 			
-			<div id = "choose_opponent" style = "display : block ">
-				<h2>Choose opponent:</h2>
-				<button id="opponent-comp" onclick="ChoosePlayer(false)">Computer</button>
-				<button id="opponent-crew" onclick="ChoosePlayer(true)">Crew Member</button>
+			<div >
+			<table align="center">
+				<tr>
+					<td><div class="box"><p>H</p></div></td>
+					<td><div class="box"><p></p></div></td>
+					<td><div class="box"><p></p></div></td>
+				</tr>
+				<tr>
+					<td><div class="box"><p></p></div></td>
+					<td><div class="box"><p></p></div></td>
+					<td><div class="box"><p></p></div></td>
+				</tr>
+				<tr>
+					<td><div class="box"><p></p></div></td>
+					<td><div class="box"><p></p></div></td>
+					<td><div class="box"><p></p></div></td>
+				</tr>
+				</table>
 			</div>
 			
-			<div id = "choose_symbol" style = "display:none">
-            <h2>Choose your symbol:</h2>
-            <button id="symbol-cross" onclick="ChooseSymbol(true)">X</button>
-            <button id="symbol-naught" onclick="ChooseSymbol(false)">O</button>
-			</div>
-			
-			<div id = "choose_level" style = "display:none">
-            <h2>Select level:</h2>
-            <button id="level-easy" onclick="ChooseLevel(true)">Easy</button>
-            <button id="level-hard" onclick="ChooseLevel(false)">Hard</button><br><br>
-			<div>
-			
-            <button id="start-game" onclick="StartGame()" style = "display:none">Start Game</button>
-        </div>
+		</div>
     </div>
-	
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="script2.js"></script>
 </body>
 </html>
