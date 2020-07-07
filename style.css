@@ -25,6 +25,9 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+	overflow: hidden;
+	margin: 0;
+  
 }
 .start-menu{
     width:35vw;
@@ -133,18 +136,88 @@ body{
     -webkit-transition: background-color 500ms; /* Safari */
     transition: background-color 500ms;
 }
-.start_playing .box{
+
+.box {
+        
+		min-width: 125px;
+        min-height: 125px;
+        background: #d5e6eb;
+        text-align: center;
+        vertical-align: center;
+        font-size: 50px;
+        font-weight: 900;
+		font-family: font-1;
+        cursor: pointer;
+		opacity: 0.6;
+		padding: 2px;
+		padding-top: 20px;
+		
+		}
+
+      .box:hover {
+        padding: 0 px;
+		opacity:0.8;
+      }
+.buttons button{
+	font-weight: bold;
+    font-family: 'font-2';
+    background-color: #4ECCB0;
+    border-radius: 8px;
+    margin: 3px;
+    padding: 15px;
+    height: 50px;
+    min-width: 55px;
+    font-size:100%;
+    border: none;
+    -webkit-transition: background-color 500ms; /* Safari */
+    transition: background-color 500ms;
+}
+.endgame {
+  display: block;
+  width: 200px;
+  top: 120px;
+  background-color: rgba(205,133,63, 0.8);
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-size: 2em;
+}
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a1abb5, 0 0 40px #a1abb5, 0 0 50px #a1abb5, 0 0 60px #a1abb5, 0 0 70px #a1abb5;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #4de3de, 0 0 40px #4de3de, 0 0 50px #4de3de, 0 0 60px #4de3de, 0 0 70px #4de3de, 0 0 80px #4de3de;
+  }
+}
+/*
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+
+/*.box{
     min-width: 125px;
     min-height: 125px;
-	padding: 2px;
+	
     background: #d5e6eb;
     text-align: center;
 	vertical-align: center;
     cursor: pointer;
-	opacity: 0.6;
+	
 }
 
-.start_playing .box:hover {
-    opacity: 0.8;
+.box:hover{
+	opacity:0.8;
 }
-
