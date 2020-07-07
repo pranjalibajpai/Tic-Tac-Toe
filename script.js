@@ -8,12 +8,12 @@ var cross=false;
 var level=false;
 var game_start=false;
 //Assuming if player chooses computer as opponent,computer will always be the second player.
-
+console.log("Hello world");
 function ChoosePlayer(player){
     if(!player){
         computer=true;
         document.getElementById('opponent-comp').className='active';
-		document.getElementById("choose_opponent").style.display = 'block';
+		document.getElementById("choose_opponent").style.display = 'none';
 		document.getElementById("choose_symbol").style.display = 'block';
     }
     else {
@@ -42,15 +42,16 @@ function ChooseLevel(easy){
     if(easy){
         document.getElementById('level-easy').className='active';
 		document.getElementById("choose_level").style.display = 'none';
-		document.getElementById("start_game").style.display = 'block';
-		
+		document.getElementById("start-game").style.display = 'block';
+		console.log("Easy Level chosen");
     }
     else{
         document.getElementById('level-hard').className='active';
 		document.getElementById("choose_level").style.display = 'none';
-		document.getElementById("start_game").style.display = 'block';
-		
+		document.getElementById("start-game").style.display = 'block';
+		console.log("Level chosen");
     }
+	
 }
 /*function afterchooseplayer()
 {
@@ -66,21 +67,10 @@ function afterchoosesymbol()
 */
 function StartGame(){
     game_start=true;
-	document.getElementById("start_game").style.display = 'none';
+	document.getElementById("start-game").style.display = 'none';
 	document.getElementById("welcome").style.display = 'none';
-	document.getElementById("start_playing").style.display = 'block';
+	//document.getElementById("start_playing").style.display = 'block';
 }
 
-function Play(){
-	let currentPlayer = "X";
-	const boxes = document.getElementsByClassName("box");
-	for (let i = 0; i < boxes.length; i++) {
-		boxes[i].addEventListener("click", function() {
-			if (boxes[i].innerHTML.trim() == "" && game_start) {
-				boxes[i].innerHTML = currentPlayer;
-				currentPlayer = currentPlayer == "X" ? "O" : "X";
-			}
-		}
-	}
-		
-}
+
+
