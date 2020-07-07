@@ -168,6 +168,7 @@ function StartGame(){
 function Back(){
 	Update();
 	Play();
+	document.getElementById("message").style.display = 'none';
     document.getElementsByClassName("start_menu")[0].style.display = 'block';
     document.getElementById("welcome").style.display = 'block';
     document.getElementById("choose_opponent").style.display = 'block';
