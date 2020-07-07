@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Paprika' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Leckerli-One' rel='stylesheet'>
     <link rel="icon" type="image/png" href="images/icon.png">
 </head>
 <body>
@@ -25,7 +24,6 @@
                 <button id="symbol-cross" onclick="ChooseSymbol(true)">X</button>
                 <button id="symbol-naught" onclick="ChooseSymbol(false)">O</button>
             </div>
-
             <div id = "choose_level">
                 <h2>Select level:</h2>
                 <button id="level-easy" onclick="ChooseLevel(true)">Easy</button>
@@ -38,44 +36,47 @@
 
         <!--***************************************PART-2 -->
         <div class="start_playing">
-			<h2 id="playing">Lets play !!</h2>
-			<div >
-			<table align="center">
-                <tr>
-					<td><div class="box" id = '0'></div></td>
-					<td><div class="box" id = '1'></div></td>
-					<td><div class="box" id = '2'></div></td>
-				</tr>
-				<tr>
-					<td><div class="box" id = '3'></div></td>
-					<td><div class="box" id = '4'></div></td>
-					<td><div class="box" id = '5'></div></td>
-				</tr>
-				<tr>
-					<td><div class="box" id = '6'></div></td>
-					<td><div class="box" id = '7'></div></td>
-					<td><div class="box" id = '8'></div></td>
-				</tr>
-                <tr>
-                    <td><div class="score"><p>Player 1</p></div></td>
-					<td><div class="score"><p>Tie</p></div></td>
-					<td><div class="score"><p>Player 2</p></div></td>
-                </tr>
-                <tr>
-                    <td><div class="score"><p>0</p></div></td>
-					<td><div class="score"><p>0</p></div></td>
-					<td><div class="score"><p>0</p></div></td>
-                </tr>
-				</table>
-			</div>
+            <h2 id="playing">Lets play !!</h2>
+            <div>
+                <table align="center">
+                    <tr>
+                        <td><div class="box" id = '0'></div></td>
+                        <td><div class="box" id = '1'></div></td>
+                        <td><div class="box" id = '2'></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="box" id = '3'></div></td>
+                        <td><div class="box" id = '4'></div></td>
+                        <td><div class="box" id = '5'></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="box" id = '6'></div></td>
+                        <td><div class="box" id = '7'></div></td>
+                        <td><div class="box" id = '8'></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="score"><p>Player 1</p></div></td>
+                        <td><div class="score"><p>Tie</p></div></td>
+                        <td><div class="score"><p>Player 2</p></div></td>
+                    </tr>
+                    <tr>
+                        <td><div class="score" id="p1"><p>0</p></div></td>
+                        <td><div class="score" id="tie"><p>0</p></div></td>
+                        <td><div class="score" id="p2"><p>0</p></div></td>
+                    </tr>
+                </table>
+            </div>
             <div id="utility">
                 <button id="back" onclick="Back()">Back</button>
-                <button id="reset" onclick="Play()">Reset</button>
+                <button id="reset" onclick="Reset()">Reset</button>
             </div>
-		</div>
-
+        </div>
+        <div id="message">
+            <h2></h2>
+        </div>
     </div>
+</div>
 
-    <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

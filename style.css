@@ -24,7 +24,6 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
-
 .start_menu{
     width:35vw;
     padding: 25px;
@@ -64,28 +63,6 @@ body{
     -webkit-transition: background-color 300ms; /* Safari */
     transition: background-color 300ms;
 }
-#welcome{
-    font-family:'font-2';
-    font-weight: bold;
-    font-size: 3vw;
-    background-color: inherit;
-}
-#start-game{
-    font-family:'font-2';
-    font-weight: bolder;
-}
-#choose_opponent{
-    display: block;
-}
-#choose_symbol{
-    display:none;
-}
-#choose_level{
-    display:none;
-}
-#start_button{
-    display:none;
-}
 
 .start_playing{
     display:none;
@@ -93,8 +70,8 @@ body{
     padding: 25px;
     border: 10px solid #99FFFF;
     border-radius:10px;
-	font-weight :bold;
-	font-family:font-1;
+    font-weight :bold;
+    font-family:font-1;
     margin: auto;
     margin-top:40px;
     margin-bottom:35px;
@@ -139,15 +116,15 @@ body{
 .start_playing .box{
     min-width: 7vw;
     min-height: 7vw;
-	padding: 2px;
+    padding: 4px;
     background: #d5e6eb;
-    font-size: 50px;
-        font-weight: 900;
-		font-family: font-1;
+    font-size: 4vw;
+    font-weight: 900;
+    font-family: font-3;
     text-align: center;
-	vertical-align: center;
+    vertical-align: center;
     cursor: pointer;
-	opacity: 0.6;
+    opacity: 0.6;
 }
 
 .start_playing .box:hover {
@@ -156,15 +133,15 @@ body{
 .start-playing .score{
     min-width: 7vw;
     min-height: 7vw;
-	padding: 2px;
+    padding: 2px;
     background: inherit;
     text-align: center;
-	vertical-align: center;
+    vertical-align: center;
     cursor: pointer;
-	opacity: 0.6;
+    opacity: 0.6;
 }
 .buttons button{
-	font-weight: bold;
+    font-weight: bold;
     font-family: 'font-2';
     background-color: #4ECCB0;
     border-radius: 8px;
@@ -178,26 +155,65 @@ body{
     transition: background-color 500ms;
 }
 .endgame {
-  display: block;
-  width: 200px;
-  top: 120px;
-  background-color: rgba(205,133,63, 0.8);
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  text-align: center;
-  border-radius: 5px;
-  color: white;
-  font-size: 2em;
+    display: block;
+    width: 200px;
+    top: 120px;
+    background-color: rgba(205,133,63, 0.8);
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+}
+#message{
+    position: absolute;
+    width: 35vw;
+    padding:20px;
+    z-index: 100;
+    left: 50%;
+    top: 40%;
+    font-family: font-2;
+    font-size: 2vw;
+    font-weight: bolder;
+    transform: translate(-50%,-50%);
+    border-radius: 35px;
+    background-color: #5A8BCE;
+    box-shadow: 3px 3px 6px #0B3A97;
+    text-align: center;
+    display: none;
 }
 @-webkit-keyframes glow {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a1abb5, 0 0 40px #a1abb5, 0 0 50px #a1abb5, 0 0 60px #a1abb5, 0 0 70px #a1abb5;
-  }
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a1abb5, 0 0 40px #a1abb5, 0 0 50px #a1abb5, 0 0 60px #a1abb5, 0 0 70px #a1abb5;
+    }
 
-  to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #4de3de, 0 0 40px #4de3de, 0 0 50px #4de3de, 0 0 60px #4de3de, 0 0 70px #4de3de, 0 0 80px #4de3de;
-  }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #4de3de, 0 0 40px #4de3de, 0 0 50px #4de3de, 0 0 60px #4de3de, 0 0 70px #4de3de, 0 0 80px #4de3de;
+    }
+}
+#welcome{
+    font-family:'font-2';
+    font-weight: bold;
+    font-size: 3vw;
+    background-color: inherit;
+}
+#start-game{
+    font-family:'font-2';
+    font-weight: bolder;
+}
+#choose_opponent{
+    display: block;
+}
+#choose_symbol{
+    display:none;
+}
+#choose_level{
+    display:none;
+}
+#start_button{
+    display:none;
 }
