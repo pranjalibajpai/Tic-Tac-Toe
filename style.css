@@ -18,33 +18,29 @@ body{
     text-align:center;
     font-family: 'font-2';
     font-size:1vw;
-}
-.start{
     background-image: url("images/bg3.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-	overflow: hidden;
-	margin: 0;
-  
 }
-.start-menu{
+
+.start_menu{
     width:35vw;
     padding: 25px;
     border: 10px solid #99FFFF;
     border-radius:10px;
     margin: auto;
-    margin-top:40px;
+    margin-top:100px;
     margin-bottom:35px;
     text-align: center;
     box-shadow: 5px 10px 8px #888888;
 }
-.start-menu h2{
+.start_menu h2{
     background-color: #5A8BCE;
     box-shadow: 3px 3px 6px #0B3A97;
 }
-.start-menu button{
+.start_menu button{
     font-weight: bold;
     font-family: 'font-2';
     background-color: #4ECCB0;
@@ -59,21 +55,14 @@ body{
     transition: background-color 500ms;
 
 }
-.start-menu button:hover{
+.start_menu button:hover{
     font-size: 1.5vw;
     font-weight: bolder;
-    background-color: #77E0C9;
+    background-color:#ccff33;
     box-shadow: 0.5px 0.5px 5px black;
     cursor: pointer; cursor: hand;
     -webkit-transition: background-color 300ms; /* Safari */
     transition: background-color 300ms;
-}
-.start-menu button.active{
-    border: 2px solid red;
-    background-color: yellow;
-    padding: 13px;
-    -webkit-transition: background-color 500ms; /* Safari */
-    transition: background-color 500ms;
 }
 #welcome{
     font-family:'font-2';
@@ -85,10 +74,21 @@ body{
     font-family:'font-2';
     font-weight: bolder;
 }
-.board{
-    background-color:black;
+#choose_opponent{
+    display: block;
 }
+#choose_symbol{
+    display:none;
+}
+#choose_level{
+    display:none;
+}
+#start_button{
+    display:none;
+}
+
 .start_playing{
+    display:none;
     width:35vw;
     padding: 25px;
     border: 10px solid #99FFFF;
@@ -136,28 +136,33 @@ body{
     -webkit-transition: background-color 500ms; /* Safari */
     transition: background-color 500ms;
 }
-
-.box {
-        
-		min-width: 125px;
-        min-height: 125px;
-        background: #d5e6eb;
-        text-align: center;
-        vertical-align: center;
-        font-size: 50px;
+.start_playing .box{
+    min-width: 7vw;
+    min-height: 7vw;
+	padding: 2px;
+    background: #d5e6eb;
+    font-size: 50px;
         font-weight: 900;
 		font-family: font-1;
-        cursor: pointer;
-		opacity: 0.6;
-		padding: 2px;
-		padding-top: 20px;
-		
-		}
+    text-align: center;
+	vertical-align: center;
+    cursor: pointer;
+	opacity: 0.6;
+}
 
-      .box:hover {
-        padding: 0 px;
-		opacity:0.8;
-      }
+.start_playing .box:hover {
+    opacity: 0.8;
+}
+.start-playing .score{
+    min-width: 7vw;
+    min-height: 7vw;
+	padding: 2px;
+    background: inherit;
+    text-align: center;
+	vertical-align: center;
+    cursor: pointer;
+	opacity: 0.6;
+}
 .buttons button{
 	font-weight: bold;
     font-family: 'font-2';
@@ -191,33 +196,8 @@ body{
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a1abb5, 0 0 40px #a1abb5, 0 0 50px #a1abb5, 0 0 60px #a1abb5, 0 0 70px #a1abb5;
   }
-  
+
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px #4de3de, 0 0 40px #4de3de, 0 0 50px #4de3de, 0 0 60px #4de3de, 0 0 70px #4de3de, 0 0 80px #4de3de;
   }
-}
-/*
-.glow {
-  font-size: 80px;
-  color: #fff;
-  text-align: center;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
-  -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
-}
-
-
-/*.box{
-    min-width: 125px;
-    min-height: 125px;
-	
-    background: #d5e6eb;
-    text-align: center;
-	vertical-align: center;
-    cursor: pointer;
-	
-}
-
-.box:hover{
-	opacity:0.8;
 }
