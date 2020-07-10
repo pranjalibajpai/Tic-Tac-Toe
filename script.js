@@ -4,6 +4,8 @@ var computer=false;
 var p1_symb='X';
 var p2_symb='O';
 var current_player='X';
+var human_player='X';
+var computer_player='O';
 var cross=false;
 var easy=true;
 var tie=0;
@@ -33,6 +35,8 @@ function ChooseSymbol(symbol){
         p1_symb='O';
         p2_symb='X';
     }
+	human_player=p1_symb;
+	computer_player=p2_symb;
     document.getElementById("choose_symbol").style.display = 'none';
 	if(computer){
 		document.getElementById("choose_starting_player_comp").style.display = 'block';
@@ -45,6 +49,8 @@ function ChooseStartingPlayer(player1){
 	if(!player1){
 		p1_symb= p1_symb === 'X' ? 'O' : 'X';
 		p2_symb= p2_symb === 'O' ? 'X' : 'O';
+		human_player=p2_symb;
+		computer_player=p1_symb;
 	}
 	if(computer){
 		document.getElementById("choose_starting_player_comp").style.display = 'none';
@@ -63,6 +69,14 @@ function ChooseLevel(level){
     document.getElementById("choose_level").style.display = 'none';
     document.getElementById("start_button").style.display = 'block';
 }
+function StartGame(){
+	document.getElementById("start_button").style.display = 'none';
+    document.getElementById("welcome").style.display = 'none';
+    document.getElementsByClassName("start_menu")[0].style.display = 'none';
+    document.getElementsByClassName("start_playing")[0].style.display = 'block';
+	Play();
+}
+/*----------------------------------------------------------------------*/
 function Play(){
 	for (var i = 0; i < boxes.length; i++) {
 		boxes[i].removeEventListener('click', getClickID, false);
@@ -77,10 +91,19 @@ function Play(){
 	two_player_game();
 }
 function computer_easy_game(){
-	//alert("easy");
+	for(let i=0;i<boxes.length;i++){
+        boxes[i].innerText = '';
+        boxes[i].style.opacity = 0.6;
+        boxes[i].addEventListener('click', getClickIDEasy, false);
+    }
+	console.log(human_player);
+	//first move by computer if it is starting player
+	if(computer_player === p1_symb){
+		random_move(initboard, computer_player);
+	}
 }
 function computer_hard_game(){
-	//alert("hard");
+
 }
 function two_player_game(){
 	for(let i=0;i<boxes.length;i++){
@@ -89,14 +112,58 @@ function two_player_game(){
         boxes[i].addEventListener('click', getClickID, false);
     }
 }
-function Update(){
-	p1_score=0;
-	p2_score=0;
-	tie=0;
-	document.getElementById("p1").innerText= p1_score;
-	document.getElementById("tie").innerText = tie;
-	document.getElementById("p2").innerText = p2_score;
+/*Two-Player-----------------------------------------------------------------*/
+function fillbox(boxID, player){
+    if(initboard[boxID] !== p1_symb && initboard[boxID] !== p2_symb){
+        initboard[boxID] = player;
+        boxes[boxID].innerText = player;
+        toggle_player();
+		var check = checkGameWon(initboard, player);
+		if(!check)
+		checkGameDraw(initboard);
+    }
 }
+function getClickID(box){
+    fillbox(box.target.id, current_player);
+}
+/*Easy-----------------------------------------------------------------*/
+function fillboxeasy(boxID){
+    if(initboard[boxID] !== 'X' && initboard[boxID] !== 'O'){
+		//humna move
+        initboard[boxID] = human_player;
+        boxes[boxID].innerText = human_player;
+		// after human move
+		var check = checkGameWon(initboard, human_player);
+		if(!check){
+			checkGameDraw(initboard);
+			random_move(initboard);
+			var comp_check = checkGameWon(initboard, computer_player);
+			if(!comp_check)
+			checkGameDraw(initboard);
+		}
+	}
+}
+function random_move(board){
+	let empty=[];
+	console.log("Empty cells");
+	for(let i=0;i<boxes.length; i++){
+		if(board[i] !== 'X' && board[i] !== 'O'){
+			console.log(i);
+			empty.push(i);
+		}
+	}
+	console.log("Selected---");
+	var randomId = Math.floor(Math.random() * empty.length );
+	var cell = empty[randomId];
+	console.log(cell);
+	board[cell] = computer_player;
+	boxes[cell].innerText = computer_player;
+}
+function getClickIDEasy(box){
+    fillboxeasy(box.target.id, human_player);
+}
+/*Hard-----------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
 function toggle_player(){
     current_player = current_player === p1_symb ? p2_symb : p1_symb;
     return current_player;
@@ -114,17 +181,21 @@ function display_winner(game_won){
 	for( let i = 0; i < game_won.combo.length; i++ ){
 		setTimeout(() => {elem = game_won.combo[i];
 		document.getElementById(elem).style.opacity = 1;
-		//document.getElementById(elem).style.webkitAnimationName = 'glow' ;
-		//document.getElementById(elem).style.webkitAnimationDuration = '2s';
 		console.log('Delay')}, i*time_step);
 	}
-	//let msg = document.getElementById("message");
 	document.getElementById("message").style.display = 'block';
-	if(game_won.player === p1_symb)
-	document.getElementById("message").innerText = "Hurray !  Player 1  won...";
-	else
-	document.getElementById("message").innerText = "Hurray !  Player 2  won...";
-	//setTimeout(() => {alert('Player '+game_won.player+' won!!');}, time_step*4);
+	if(computer){
+			if(game_won.player === human_player)
+			document.getElementById("message").innerText = "You won...";
+			else
+			document.getElementById("message").innerText = "You lost...";
+	}
+	else{
+		if(game_won.player === p1_symb)
+		document.getElementById("message").innerText = "Hurray !  Player 1  won...";
+		else
+		document.getElementById("message").innerText = "Hurray !  Player 2  won...";
+	}
 	for (var i = 0; i < boxes.length; i++) {
 		boxes[i].removeEventListener('click', getClickID, false);
 	}
@@ -169,28 +240,16 @@ function checkGameDraw(board){
 		}
 	}
 }
-function fillbox(boxID, player){
-    if(initboard[boxID] != p1_symb && initboard[boxID] != p2_symb){
-        initboard[boxID] = player;
-        boxes[boxID].innerText = player;
-        toggle_player();
-		var check = checkGameWon(initboard, player);
-		//console.log(check);
-		if(!check)
-		checkGameDraw(initboard);
-        //if(!checkGameWon(initboard, player))
-		//checkGameDraw(initboard);
-    }
-}
-function getClickID(box){
-    fillbox(box.target.id, current_player);
-}
-function StartGame(){
-	document.getElementById("start_button").style.display = 'none';
-    document.getElementById("welcome").style.display = 'none';
-    document.getElementsByClassName("start_menu")[0].style.display = 'none';
-    document.getElementsByClassName("start_playing")[0].style.display = 'block';
-	Play();
+
+/*----------------------------------------------------------------------*/
+
+function Update(){
+	p1_score=0;
+	p2_score=0;
+	tie=0;
+	document.getElementById("p1").innerText= p1_score;
+	document.getElementById("tie").innerText = tie;
+	document.getElementById("p2").innerText = p2_score;
 }
 function Back(){
 	Update();
