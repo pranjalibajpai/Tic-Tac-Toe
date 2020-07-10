@@ -76,7 +76,6 @@ function StartGame(){
     document.getElementsByClassName("start_playing")[0].style.display = 'block';
 	Play();
 }
-/*----------------------------------------------------------------------*/
 function Play(){
 	for (var i = 0; i < boxes.length; i++) {
 		boxes[i].removeEventListener('click', getClickID, false);
@@ -91,6 +90,7 @@ function Play(){
 	two_player_game();
 }
 function computer_easy_game(){
+	console.log("computer easy game");
 	for(let i=0;i<boxes.length;i++){
         boxes[i].innerText = '';
         boxes[i].style.opacity = 0.6;
@@ -99,7 +99,7 @@ function computer_easy_game(){
 	console.log(human_player);
 	//first move by computer if it is starting player
 	if(computer_player === p1_symb){
-		random_move(initboard, computer_player);
+		random_move();
 	}
 }
 function computer_hard_game(){
@@ -112,9 +112,12 @@ function two_player_game(){
         boxes[i].addEventListener('click', getClickID, false);
     }
 }
-/*Two-Player-----------------------------------------------------------------*/
+function toggle_player(){
+    current_player = current_player === p1_symb ? p2_symb : p1_symb;
+    return current_player;
+}
 function fillbox(boxID, player){
-    if(initboard[boxID] !== p1_symb && initboard[boxID] !== p2_symb){
+    if(initboard[boxID] != p1_symb && initboard[boxID] != p2_symb){
         initboard[boxID] = player;
         boxes[boxID].innerText = player;
         toggle_player();
@@ -126,47 +129,45 @@ function fillbox(boxID, player){
 function getClickID(box){
     fillbox(box.target.id, current_player);
 }
-/*Easy-----------------------------------------------------------------*/
 function fillboxeasy(boxID){
-    if(initboard[boxID] !== 'X' && initboard[boxID] !== 'O'){
-		//humna move
-        initboard[boxID] = human_player;
-        boxes[boxID].innerText = human_player;
-		// after human move
-		var check = checkGameWon(initboard, human_player);
-		if(!check){
-			checkGameDraw(initboard);
-			random_move(initboard);
-			var comp_check = checkGameWon(initboard, computer_player);
-			if(!comp_check)
-			checkGameDraw(initboard);
+	if(computer){
+		//console.log("HERE");
+	    if(initboard[boxID] !== 'X' && initboard[boxID] !== 'O'){
+			//humna move
+	        initboard[boxID] = human_player;
+	        boxes[boxID].innerText = human_player;
+			// after human move
+			var check = checkGameWon(initboard, human_player);
+			if(!check){
+				checkGameDraw(initboard);
+				random_move();
+				var comp_check = checkGameWon(initboard, computer_player);
+				if(!comp_check)
+				checkGameDraw(initboard);
+			}
 		}
 	}
 }
-function random_move(board){
-	let empty=[];
-	console.log("Empty cells");
-	for(let i=0;i<boxes.length; i++){
-		if(board[i] !== 'X' && board[i] !== 'O'){
-			console.log(i);
-			empty.push(i);
+function random_move(){
+	if(computer){
+		let empty=[];
+		//console.log("Empty cells");
+		for(let i=0;i<boxes.length; i++){
+			if(initboard[i] !== 'X' && initboard[i] !== 'O'){
+				//console.log(i);
+				empty.push(i);
+			}
 		}
+		//console.log("Selected---");
+		var randomId = Math.floor(Math.random() * empty.length );
+		var cell = empty[randomId];
+		//console.log(cell);
+		initboard[cell] = computer_player;
+		boxes[cell].innerText = computer_player;
 	}
-	console.log("Selected---");
-	var randomId = Math.floor(Math.random() * empty.length );
-	var cell = empty[randomId];
-	console.log(cell);
-	board[cell] = computer_player;
-	boxes[cell].innerText = computer_player;
 }
 function getClickIDEasy(box){
     fillboxeasy(box.target.id, human_player);
-}
-/*Hard-----------------------------------------------------------------*/
-/*----------------------------------------------------------------------*/
-function toggle_player(){
-    current_player = current_player === p1_symb ? p2_symb : p1_symb;
-    return current_player;
 }
 function display_winner(game_won){
     let elem;
@@ -234,31 +235,34 @@ function checkGameDraw(board){
 		document.getElementById("tie").innerText = tie;
 		document.getElementById("message").style.display = 'block';
 		document.getElementById("message").innerText = "Ugh !  It was a draw...";
-		//setTimeout(() => {alert("Ugh! It's a Tie");}, time_step*4);
 		for (let i = 0; i < boxes.length; i++) {
 			boxes[i].removeEventListener('click', getClickID, false);
 		}
 	}
 }
-
-/*----------------------------------------------------------------------*/
-
 function Update(){
+	computer=false;
 	p1_score=0;
 	p2_score=0;
 	tie=0;
+	p1_symb='X';
+	p2_symb='O';
+	human_player='X';
+	computer_player='O';
+    cross=false;
+	easy=true;
 	document.getElementById("p1").innerText= p1_score;
 	document.getElementById("tie").innerText = tie;
 	document.getElementById("p2").innerText = p2_score;
 }
 function Back(){
-	Update();
-	Play();
 	document.getElementById("message").style.display = 'none';
     document.getElementsByClassName("start_menu")[0].style.display = 'block';
     document.getElementById("welcome").style.display = 'block';
     document.getElementById("choose_opponent").style.display = 'block';
     document.getElementsByClassName("start_playing")[0].style.display = 'none';
+	Update();
+	Play();
 }
 function Reset(){
 	Play();
