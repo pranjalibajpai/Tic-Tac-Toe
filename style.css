@@ -36,6 +36,7 @@ body{
     box-shadow: 5px 10px 8px #888888;
 }
 .start_menu h2{
+    padding: 10px;
     background-color: #5A8BCE;
     box-shadow: 3px 3px 6px #0B3A97;
 }
@@ -79,6 +80,7 @@ body{
     box-shadow: 5px 10px 8px #888888;
 }
 .start_playing h2{
+    padding: 10px;
     background-color: #5A8BCE;
     box-shadow: 3px 3px 6px #0B3A97;
 }
@@ -175,7 +177,7 @@ body{
     padding:20px;
     z-index: 100;
     left: 50%;
-    top: 40%;
+    top: 47%;
     font-family: font-2;
     font-size: 2vw;
     font-weight: bolder;
@@ -215,5 +217,11 @@ body{
     display:none;
 }
 #start_button{
+    display:none;
+}
+#choose_starting_player{
+    display:none;
+}
+#choose_starting_player_comp{
     display:none;
 }

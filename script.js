@@ -6,7 +6,6 @@ var p2_symb='O';
 var current_player='X';
 var cross=false;
 var easy=true;
-var game_start=false;
 var tie=0;
 var initboard;
 const winCombos = [
@@ -20,7 +19,6 @@ const winCombos = [
 	[6, 4, 2]
 ]
 const boxes = document.querySelectorAll('.box');
-//Assuming if player chooses computer as opponent,computer will always be the second player.
 
 function ChoosePlayer(player){
     if(!player){
@@ -37,9 +35,23 @@ function ChooseSymbol(symbol){
     }
     document.getElementById("choose_symbol").style.display = 'none';
 	if(computer){
+		document.getElementById("choose_starting_player_comp").style.display = 'block';
+	}
+	else{
+		document.getElementById("choose_starting_player").style.display = 'block';
+	}
+}
+function ChooseStartingPlayer(player1){
+	if(!player1){
+		p1_symb= p1_symb === 'X' ? 'O' : 'X';
+		p2_symb= p2_symb === 'O' ? 'X' : 'O';
+	}
+	if(computer){
+		document.getElementById("choose_starting_player_comp").style.display = 'none';
 		document.getElementById("choose_level").style.display = 'block';
 	}
-    else{
+	else{
+		document.getElementById("choose_starting_player").style.display = 'none';
 		document.getElementById("choose_level").style.display = 'none';
 		document.getElementById("start_button").style.display = 'block';
 	}
@@ -51,11 +63,27 @@ function ChooseLevel(level){
     document.getElementById("choose_level").style.display = 'none';
     document.getElementById("start_button").style.display = 'block';
 }
-Play();
 function Play(){
-
+	for (var i = 0; i < boxes.length; i++) {
+		boxes[i].removeEventListener('click', getClickID, false);
+	}
+	current_player = p1_symb;
     initboard = Array.from(Array(9).keys());
-    for(let i=0;i<boxes.length;i++){
+	if(computer && easy)
+	computer_easy_game();
+	else if(computer && !easy)
+	computer_hard_game();
+	else
+	two_player_game();
+}
+function computer_easy_game(){
+	//alert("easy");
+}
+function computer_hard_game(){
+	//alert("hard");
+}
+function two_player_game(){
+	for(let i=0;i<boxes.length;i++){
         boxes[i].innerText = '';
         boxes[i].style.opacity = 0.6;
         boxes[i].addEventListener('click', getClickID, false);
@@ -86,8 +114,8 @@ function display_winner(game_won){
 	for( let i = 0; i < game_won.combo.length; i++ ){
 		setTimeout(() => {elem = game_won.combo[i];
 		document.getElementById(elem).style.opacity = 1;
-		document.getElementById(elem).style.webkitAnimationName = 'glow' ;
-		document.getElementById(elem).style.webkitAnimationDuration = '2s';
+		//document.getElementById(elem).style.webkitAnimationName = 'glow' ;
+		//document.getElementById(elem).style.webkitAnimationDuration = '2s';
 		console.log('Delay')}, i*time_step);
 	}
 	//let msg = document.getElementById("message");
@@ -158,12 +186,11 @@ function getClickID(box){
     fillbox(box.target.id, current_player);
 }
 function StartGame(){
-    game_start=true;
 	document.getElementById("start_button").style.display = 'none';
     document.getElementById("welcome").style.display = 'none';
     document.getElementsByClassName("start_menu")[0].style.display = 'none';
     document.getElementsByClassName("start_playing")[0].style.display = 'block';
-
+	Play();
 }
 function Back(){
 	Update();
