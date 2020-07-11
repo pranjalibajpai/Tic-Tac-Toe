@@ -29,8 +29,9 @@ function ChoosePlayer(player){
 		document.getElementById("choose_starting_player_comp").style.display = 'block';
     }
     else{
-	document.getElementById("choose_opponent").style.display = 'none';
-    document.getElementById("choose_starting_player").style.display = 'block';
+		computer=false;
+		document.getElementById("choose_opponent").style.display = 'none';
+		document.getElementById("choose_starting_player").style.display = 'block';
 	}
 }
 
@@ -103,6 +104,9 @@ function ChooseLevel(level){
     if(!level){
         easy=false;
     }
+	else{
+		easy=true;
+	}
     document.getElementById("choose_level").style.display = 'none';
     document.getElementById("start_button").style.display = 'block';
 }
@@ -243,9 +247,10 @@ function display_winner(game_won){
 	for( let i = 0; i < game_won.combo.length; i++ ){
 		setTimeout(() => {elem = game_won.combo[i];
 		document.getElementById(elem).style.opacity = 1;
-		document.getElementById(elem).style.webkitAnimationName = 'glow' ;
-		document.getElementById(elem).style.webkitAnimationDuration = '2s';
-		console.log('Delay')}, i*time_step);
+		//document.getElementById(elem).style.webkitAnimationName = 'glow' ;
+		//document.getElementById(elem).style.webkitAnimationDuration = '2s';
+		//console.log('Delay')
+		}, i*time_step);
 	}
 	
 	document.getElementById("message").style.display = 'block';
@@ -272,9 +277,10 @@ function display_winner_comp(game_won){
 	for( let i = 0; i < game_won.combo.length; i++ ){
 		setTimeout(() => {elem = game_won.combo[i];
 		document.getElementById(elem).style.opacity = 1;
-		document.getElementById(elem).style.webkitAnimationName = 'glow' ;
-		document.getElementById(elem).style.webkitAnimationDuration = '2s';
-		console.log('Delay')}, i*time_step);
+		//document.getElementById(elem).style.webkitAnimationName = 'glow' ;
+		//document.getElementById(elem).style.webkitAnimationDuration = '2s';
+		//console.log('Delay')
+		}, i*time_step);
 	}
 	document.getElementById("message").style.display = 'block';
 	if(game_won.player === human_player)
@@ -335,15 +341,15 @@ function empty_loc(board){
 
 function random_move(board){
 	empty  = empty_loc(board);
-	console.log("Selected---");
+	//console.log("Selected---");
 	let randomId = Math.floor(Math.random() * empty.length );	
 	return empty[randomId];		
 }
 
 function minimax(board, player) {
 	var empty = empty_loc(board);
-	console.log(empty.length);
-	console.log('Inside');
+	//console.log(empty.length);
+	//console.log('Inside');
 
 	if (checkGameWon(board, human_player,true)) {
 		return {score: -1};
@@ -360,7 +366,7 @@ function minimax(board, player) {
 		var move = {};	//object type
 		move.fill_loc = board[empty[i]];
 		board[empty[i]] = player;	//assuming 
-		console.log(board);
+		//console.log(board);
 		
 		if (player == computer_player) {
 			let result = minimax(board, human_player);
@@ -397,8 +403,8 @@ function minimax(board, player) {
 	
 	
 	
-	console.log('Possible moves :')
-	console.log(possible_moves[best_move]);
+	//console.log('Possible moves :')
+	//console.log(possible_moves[best_move]);
 	return possible_moves[best_move];
 }
 
