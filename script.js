@@ -43,7 +43,7 @@ function ChooseStartingPlayer(player1){
 		}
 		else{
 		p1_symb = 'X';
-		p2_symb = 'O';	
+		p2_symb = 'O';
 		}
 		document.getElementById("choose_starting_player").style.display = 'none';
 		document.getElementById("start_button").style.display = 'block';
@@ -52,7 +52,7 @@ function ChooseStartingPlayer(player1){
 		p1_symb = 'X';	//assuming computer
 		p2_symb = 'O';
 		if(!player1)
-		{			
+		{
 			current_player = 'X';
 		}
 		else{
@@ -61,7 +61,7 @@ function ChooseStartingPlayer(player1){
 		document.getElementById("choose_starting_player_comp").style.display = 'none';
 		document.getElementById("choose_symbol").style.display = 'block';
 	}
-	
+
 }
 function ChooseSymbol(symbol){
     if(current_player == 'X')	//first is comp
@@ -71,14 +71,14 @@ function ChooseSymbol(symbol){
 			p1_symb = 'X';
 			p2_symb = 'O';
 		}
-		else 
+		else
 		{
 			p1_symb = 'O';
 			p2_symb = 'X';
 		}
 		human_player=p2_symb;
 		computer_player=p1_symb;
-		
+
     }
 	else
 	{
@@ -87,7 +87,7 @@ function ChooseSymbol(symbol){
 			p1_symb = 'O';
 			p2_symb = 'X';
 		}
-		else 
+		else
 		{
 			p1_symb = 'X';
 			p2_symb = 'O';
@@ -117,7 +117,7 @@ function StartGame(){
     document.getElementsByClassName("start_menu")[0].style.display = 'none';
     document.getElementsByClassName("start_playing")[0].style.display = 'block';
 	Play();
-	
+
 }
 function change_scoreboard(){
 	if(computer)
@@ -129,7 +129,7 @@ function change_scoreboard(){
 		document.getElementById("player1").innerText = 'Player 1';
 		document.getElementById("player2").innerText = 'Player 2';
 	}
-	
+
 }
 
 function Update(){
@@ -157,7 +157,7 @@ function Reset(){
 function fillbox(boxID, player){
         initboard[boxID] = player;
         boxes[boxID].innerText = player;
-		
+
 		var check = checkGameWon(initboard, player,false);
 		if(!check)
 			checkGameDraw(initboard);
@@ -171,6 +171,10 @@ function Play(){
     initboard = Array.from(Array(9).keys());
 	change_scoreboard();
 	current_player = p1_symb;
+	for(let i=0;i<boxes.length;i++){
+		boxes[i].removeEventListener('click', getClickIDEasy, false);
+		boxes[i].removeEventListener('click', getClickID, false);
+	}
     for(let i=0;i<boxes.length;i++){
         boxes[i].innerText = '';
         boxes[i].style.opacity = 0.6;
@@ -181,7 +185,8 @@ function Play(){
     }
 	if(computer && computer_player == p1_symb)
 	{
-		fillbox(computer_move(initboard, easy),computer_player);
+		console.log("first one");
+		fillbox(computer_corner_move(initboard, easy),computer_player);
 	}
 }
 /*---------------------------Check Game Won/Draw-----------------------------*/
@@ -199,10 +204,10 @@ function checkGameWon(board, player, check){
         win = winCombos[i];
         if(win.every((elem)=> result.indexOf(elem) > -1)){
             game_won = {index:i, player:player, combo:win};
-            
+
 			if(check)							//only checks no display
 				return true;
-			
+
 			else{
 			if(computer)
 				display_winner_comp(game_won);
@@ -252,13 +257,13 @@ function display_winner(game_won){
 		//console.log('Delay')
 		}, i*time_step);
 	}
-	
+
 	document.getElementById("message").style.display = 'block';
 	if(game_won.player === p1_symb)
 		document.getElementById("message").innerText = "Hurray !  Player 1  won...";
 	else
 		document.getElementById("message").innerText = "Hurray !  Player 2  won...";
-	
+
 	for (var i = 0; i < boxes.length; i++) {
 		boxes[i].removeEventListener('click', getClickID, false);
 	}
@@ -295,6 +300,7 @@ function display_winner_comp(game_won){
 /*----------------------------Two-Player-------------------------------------*/
 
 function getClickID(box){
+	console.log("on click 2 player");
     fillbox(box.target.id, current_player);
 	boxes[box.target.id].removeEventListener('click', getClickID, false);
 	toggle_player();
@@ -309,21 +315,25 @@ function toggle_player(){
 /*-----------------------------Against Computer-----------------------------*/
 
 function getClickIDEasy(box){
+	console.log("on click human player");
     fillbox(box.target.id, human_player);
 	boxes[box.target.id].removeEventListener('click', getClickIDEasy, false);
 	if(!checkGameWon(initboard, human_player,true) && empty_loc(initboard).length)
 	{
 		let boxID = computer_move(initboard, easy);
+		console.log("computer move");
 		fillbox(boxID, computer_player);
-		boxes[boxID].removeEventListener('click', getClickIDEasy, false);	
+		boxes[boxID].removeEventListener('click', getClickIDEasy, false);
 	}
 }
 
 function computer_move(board, easy){
 	if(easy){
 		return random_move(board);
-	}	
-	return minimax(initboard, computer_player).fill_loc;
+	}
+	else{
+		return minimax(initboard, computer_player).fill_loc;
+	}
 }
 
 function empty_loc(board){
@@ -333,7 +343,6 @@ function empty_loc(board){
 		if(board[i] !== 'X' && board[i] !== 'O'){
 			empty.push(i);
 			//console.log(i);
-			
 		}
 	}
 	return empty;
@@ -342,8 +351,20 @@ function empty_loc(board){
 function random_move(board){
 	empty  = empty_loc(board);
 	//console.log("Selected---");
-	let randomId = Math.floor(Math.random() * empty.length );	
-	return empty[randomId];		
+	let randomId = Math.floor(Math.random() * empty.length );
+	return empty[randomId];
+}
+
+function computer_corner_move(board, easy){
+	console.log("HERE");
+	if(easy){
+		return random_move(board);
+	}
+	else{
+		let corner=[0, 2, 6, 8];
+		var cornerID = Math.floor(Math.random()*corner.length);
+		return corner[cornerID];
+	}
 }
 
 function minimax(board, player) {
@@ -353,25 +374,25 @@ function minimax(board, player) {
 
 	if (checkGameWon(board, human_player,true)) {
 		return {score: -1};
-	} 
+	}
 	else if (checkGameWon(board, computer_player,true)) {
 		return {score: 1};
-	} 
+	}
 	else if (empty.length === 0 ) {
 		return {score: 0};
 	}
-	
+
 	var possible_moves = [];
 	for (let i = 0; i < empty.length; i++) {
 		var move = {};	//object type
 		move.fill_loc = board[empty[i]];
-		board[empty[i]] = player;	//assuming 
+		board[empty[i]] = player;	//assuming
 		//console.log(board);
-		
+
 		if (player == computer_player) {
 			let result = minimax(board, human_player);
 			move.score = result.score;
-		} 
+		}
 		else {
 			let result = minimax(board, computer_player);
 			move.score = result.score;
@@ -400,13 +421,8 @@ function minimax(board, player) {
 			}
 		}
 	}
-	
-	
-	
+
 	//console.log('Possible moves :')
 	//console.log(possible_moves[best_move]);
 	return possible_moves[best_move];
 }
-
-
-
