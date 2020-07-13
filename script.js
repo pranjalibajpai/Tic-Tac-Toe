@@ -137,6 +137,8 @@ function Update(){
 }
 function Back(){
 	Update();
+	document.getElementById('player2').className = 'score';
+	document.getElementById('player1').className = 'score';
 	document.getElementById("message").style.display = 'none';
     document.getElementsByClassName("start_menu")[0].style.display = 'block';
     document.getElementById("welcome").style.display = 'block';
