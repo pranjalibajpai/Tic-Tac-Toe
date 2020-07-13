@@ -34,7 +34,6 @@ function ChoosePlayer(player){
 		document.getElementById("choose_starting_player").style.display = 'block';
 	}
 }
-
 function ChooseStartingPlayer(player1){
 	if(!computer){
 		if(!player1){
@@ -78,7 +77,6 @@ function ChooseSymbol(symbol){
 		}
 		human_player=p2_symb;
 		computer_player=p1_symb;
-
     }
 	else
 	{
@@ -99,7 +97,6 @@ function ChooseSymbol(symbol){
 	document.getElementById("choose_symbol").style.display = 'none';
 	document.getElementById("choose_level").style.display = 'block';
 }
-
 function ChooseLevel(level){
     if(!level){
         easy=false;
@@ -110,15 +107,15 @@ function ChooseLevel(level){
     document.getElementById("choose_level").style.display = 'none';
     document.getElementById("start_button").style.display = 'block';
 }
-
 function StartGame(){
 	document.getElementById("start_button").style.display = 'none';
     document.getElementById("welcome").style.display = 'none';
     document.getElementsByClassName("start_menu")[0].style.display = 'none';
     document.getElementsByClassName("start_playing")[0].style.display = 'block';
 	Play();
-
 }
+
+
 function change_scoreboard(){
 	if(computer)
 	{
@@ -129,9 +126,7 @@ function change_scoreboard(){
 		document.getElementById("player1").innerText = 'Player 1';
 		document.getElementById("player2").innerText = 'Player 2';
 	}
-
 }
-
 function Update(){
 	p1_score=0;
 	p2_score=0;
@@ -140,7 +135,6 @@ function Update(){
 	document.getElementById("tie").innerText = tie;
 	document.getElementById("p2").innerText = p2_score;
 }
-
 function Back(){
 	Update();
 	document.getElementById("message").style.display = 'none';
@@ -154,7 +148,17 @@ function Reset(){
 	document.getElementById("message").style.display = 'none';
 }
 
+function SuggestedMove(){
+	let min = current_player === p1_symb ? p2_symb : p1_symb;
+	let max = current_player === p1_symb ? p1_symb : p2_symb;
+	let box_id = minimax2(initboard, current_player, 0, min, max).fill_loc;
+	boxes[box_id].style.opacity = 1;
+	//console.log(box_id);
+}
 function fillbox(boxID, player){
+		//for removing suggested box
+		for(let i=0; i<9; i++)
+		boxes[i].style.opacity = 0.6;
         initboard[boxID] = player;
         boxes[boxID].innerText = player;
 
@@ -165,7 +169,6 @@ function fillbox(boxID, player){
 
 
 //---------------------------Driver Code-------------------------------
-
 
 function Play(){
     initboard = Array.from(Array(9).keys());
@@ -185,10 +188,13 @@ function Play(){
     }
 	if(computer && computer_player == p1_symb)
 	{
-		console.log("first one");
+		//console.log("first one");
 		fillbox(computer_corner_move(initboard, easy),computer_player);
 	}
+	if(!computer)
+	display_move();
 }
+
 /*---------------------------Check Game Won/Draw-----------------------------*/
 
 function checkGameWon(board, player, check){
@@ -268,7 +274,6 @@ function display_winner(game_won){
 		boxes[i].removeEventListener('click', getClickID, false);
 	}
 }
-
 function display_winner_comp(game_won){
     let elem;
 	let time_step = 200;
@@ -299,34 +304,43 @@ function display_winner_comp(game_won){
 
 /*----------------------------Two-Player-------------------------------------*/
 
+function display_move(){
+	//console.log("display"+current_player);
+	if(current_player === p1_symb){
+		document.getElementById('player2').className = 'score';
+		document.getElementById('player1').className = 'score-current';
+	}
+	else{
+		document.getElementById('player1').className = 'score';
+		document.getElementById('player2').className = 'score-current';
+	}
+}
 function getClickID(box){
-	console.log("on click 2 player");
+	//console.log("on click 2 player");
     fillbox(box.target.id, current_player);
 	boxes[box.target.id].removeEventListener('click', getClickID, false);
 	toggle_player();
+	display_move();
 }
-
 function toggle_player(){
     current_player = current_player === p1_symb ? p2_symb : p1_symb;
     return current_player;
 }
 
-
 /*-----------------------------Against Computer-----------------------------*/
 
 function getClickIDEasy(box){
-	console.log("on click human player");
+	//console.log("on click human player");
     fillbox(box.target.id, human_player);
 	boxes[box.target.id].removeEventListener('click', getClickIDEasy, false);
 	if(!checkGameWon(initboard, human_player,true) && empty_loc(initboard).length)
 	{
 		let boxID = computer_move(initboard, easy);
-		console.log("computer move");
+		//console.log("computer move");
 		fillbox(boxID, computer_player);
 		boxes[boxID].removeEventListener('click', getClickIDEasy, false);
 	}
 }
-
 function computer_move(board, easy){
 	if(easy){
 		return random_move(board);
@@ -335,7 +349,6 @@ function computer_move(board, easy){
 		return minimax(initboard, computer_player).fill_loc;
 	}
 }
-
 function empty_loc(board){
 	let empty=[];
 	//console.log("Empty cells");
@@ -347,24 +360,73 @@ function empty_loc(board){
 	}
 	return empty;
 }
-
 function random_move(board){
 	empty  = empty_loc(board);
 	//console.log("Selected---");
 	let randomId = Math.floor(Math.random() * empty.length );
 	return empty[randomId];
 }
-
 function computer_corner_move(board, easy){
-	console.log("HERE");
+	//console.log("HERE");
 	if(easy){
 		return random_move(board);
 	}
 	else{
-		let corner=[0, 2, 6, 8];
+		let corner=[0, 2, 4, 6, 8];
 		var cornerID = Math.floor(Math.random()*corner.length);
 		return corner[cornerID];
 	}
+}
+
+function minimax2(board, player,depth, minimizer, maximizer){
+	let empty = empty_loc(board);
+	var possible_moves = [];
+	if(checkGameWon(board, maximizer, true)){
+		return {score: 10-depth};
+	}
+	else if(checkGameWon(board, minimizer, true)){
+		return {score: -10+depth};
+	}
+	else if(empty.length === 0){
+		return {score: 0};
+	}
+	for(let i=0; i<empty.length; i++){
+		let move = {};
+		move.fill_loc = board[empty[i]];
+		board[empty[i]] = player;
+
+		if(player === maximizer){
+			let result = minimax2(board, maximizer, depth+1, minimizer, maximizer);
+			move.score = result.score;
+		}
+		else if(player === minimizer){
+			let result = minimax2(board, minimizer,depth+1, minimizer, maximizer);
+			move.score = result.score;
+		}
+		board[empty[i]] = move.fill_loc;
+		possible_moves.push(move);
+	}
+	let best_move = -1;
+	if(player === maximizer){
+		best_move_score = -1000;
+		for(let i=0; i<possible_moves.length; i++){
+			if(possible_moves[i].score > best_move_score){
+				best_move_score = possible_moves[i].score;
+				best_move = i;
+			}
+		}
+	}
+	else if(player === minimizer){
+		best_move_score = 1000;
+		for(let i=0; i<possible_moves.length; i++){
+			if(possible_moves[i].score < best_move_score){
+				best_move_score = possible_moves[i].score;
+				best_move = i;
+			}
+		}
+	}
+
+	return possible_moves[best_move];
 }
 
 function minimax(board, player) {

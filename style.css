@@ -142,6 +142,14 @@ body{
     cursor: pointer;
     opacity: 0.6;
 }
+.score-current{
+    min-width: 7vw;
+    padding: 2px;
+    background: #d5e6eb;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid #77E0C9;
+}
 .buttons button{
     font-weight: bold;
     font-family: 'font-2';
