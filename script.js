@@ -153,7 +153,11 @@ function Reset(){
 function SuggestedMove(){
 	let min = current_player === p1_symb ? p2_symb : p1_symb;
 	let max = current_player === p1_symb ? p1_symb : p2_symb;
-	let box_id = minimax2(initboard, current_player, 0, min, max).fill_loc;
+	let box_id;
+	if(computer)
+	box_id = minimax_computer(initboard, current_player, 0, min, max).fill_loc;
+	else
+    box_id = minimax_2player(initboard, current_player, 0, min, max).fill_loc;
 	boxes[box_id].style.opacity = 1;
 	//console.log(box_id);
 }
@@ -379,8 +383,36 @@ function computer_corner_move(board, easy){
 		return corner[cornerID];
 	}
 }
-
-function minimax2(board, player,depth, minimizer, maximizer){
+// Suggestion for 2 player
+function minimax_2player(board, player,depth, minimizer, maximizer){
+	let empty = empty_loc(board);
+	let move = {};
+	//check if max can win after 1 move
+	for(let i=0; i<empty.length; i++){
+		move.fill_loc = board[empty[i]];
+		board[empty[i]] = maximizer;
+		if(checkGameWon(board, maximizer, true)){
+			move.score = 10;
+			return move;
+		}
+		board[empty[i]] = move.fill_loc;
+	}
+	//check if min can win after 1 move
+	move={};
+	for(let i=0;i<empty.length; i++){
+		move.fill_loc = board[empty[i]];
+		board[empty[i]] = minimizer;
+		if(checkGameWon(board, minimizer, true)){
+			move.score = 10;
+			return move;
+		}
+		board[empty[i]] = move.fill_loc;
+	}
+	//normal minimax
+	return minimax(board, player, 0, minimizer, maximizer);
+}
+//Suggestion for human against computer
+function minimax_computer(board, player,depth, minimizer, maximizer){
 	let empty = empty_loc(board);
 	var possible_moves = [];
 	if(checkGameWon(board, maximizer, true)){
@@ -398,11 +430,11 @@ function minimax2(board, player,depth, minimizer, maximizer){
 		board[empty[i]] = player;
 
 		if(player === maximizer){
-			let result = minimax2(board, maximizer, depth+1, minimizer, maximizer);
+			let result = minimax_computer(board, maximizer, depth+1, minimizer, maximizer);
 			move.score = result.score;
 		}
 		else if(player === minimizer){
-			let result = minimax2(board, minimizer,depth+1, minimizer, maximizer);
+			let result = minimax_computer(board, minimizer,depth+1, minimizer, maximizer);
 			move.score = result.score;
 		}
 		board[empty[i]] = move.fill_loc;
