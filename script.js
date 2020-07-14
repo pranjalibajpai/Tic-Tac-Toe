@@ -154,9 +154,9 @@ function SuggestedMove(){
 	let min = current_player === p1_symb ? p2_symb : p1_symb;
 	let max = current_player === p1_symb ? p1_symb : p2_symb;
 	let box_id;
-	if(computer)
-	box_id = minimax_computer(initboard, current_player, 0, min, max).fill_loc;
-	else
+	//if(computer)
+	//box_id = minimax_computer(initboard, current_player, 0, min, max).fill_loc;
+	//else
     box_id = minimax_2player(initboard, current_player, 0, min, max).fill_loc;
 	boxes[box_id].style.opacity = 1;
 	//console.log(box_id);
