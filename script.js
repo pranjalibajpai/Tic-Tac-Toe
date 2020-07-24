@@ -151,12 +151,18 @@ function Reset(){
 }
 
 function SuggestedMove(){
+	
+	if(checkGameWon('X', board, 1) || checkGameWon('O', board, 1) || checkGameDraw(board, 1) )
+		return;
+	
 	let min = current_player === p1_symb ? p2_symb : p1_symb;
 	let max = current_player === p1_symb ? p1_symb : p2_symb;
 	let box_id;
 	//if(computer)
 	//box_id = minimax_computer(initboard, current_player, 0, min, max).fill_loc;
 	//else
+		
+	
     box_id = minimax_2player(initboard, current_player, 0, min, max).fill_loc;
 	boxes[box_id].style.opacity = 1;
 	//console.log(box_id);
@@ -170,7 +176,7 @@ function fillbox(boxID, player){
 
 		var check = checkGameWon(initboard, player,false);
 		if(!check)
-			checkGameDraw(initboard);
+			checkGameDraw(initboard,0);
 }
 
 
@@ -231,7 +237,7 @@ function checkGameWon(board, player, check){
     }
 	return false;
 }
-function checkGameDraw(board){
+function checkGameDraw(board, check){
 	let time_step = 200;
 	var draw = true;
 	for(let i=0; i<board.length; i++){
@@ -241,6 +247,9 @@ function checkGameDraw(board){
 			break;
 		}
 	}
+	if(check)
+		return draw;
+	
 	if(draw){
 		tie++;
 		document.getElementById("tie").innerText = tie;
@@ -385,6 +394,7 @@ function computer_corner_move(board, easy){
 }
 // Suggestion for 2 player
 function minimax_2player(board, player,depth, minimizer, maximizer){
+	
 	let empty = empty_loc(board);
 	let move = {};
 	//check if max can win after 1 move
