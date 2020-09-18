@@ -152,7 +152,7 @@ function Reset(){
 
 function SuggestedMove(){
 	
-	if(checkGameWon('X', board, 1) || checkGameWon('O', board, 1) || checkGameDraw(board, 1) )
+	if(checkGameWon('X', initboard, 1) || checkGameWon('O', initboard, 1) || checkGameDraw(initboard, 1) )
 		return;
 	
 	let min = current_player === p1_symb ? p2_symb : p1_symb;
